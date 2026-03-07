@@ -1,0 +1,19 @@
+[book]
+src = "src"
+language = "en"
+title = "Malspam Analysis"
+authors = ["Ioannis Somos <chronobserver@disroot.org>"]
+
+[output.html]
+git-repository-url = "https://github.com/ObserverOfTime/malspam-analysis"
+edit-url-template = "https://github.com/ObserverOfTime/malspam-analysis/blob/master/{path}"
+site-url = "/malspam-analysis/"
+default-theme = "rust"
+preferred-dark-theme = "coal"
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.search]
+expand = true

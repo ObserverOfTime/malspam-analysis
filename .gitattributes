@@ -1,0 +1,4 @@
+*.md linguist-detectable=true
+
+themes/highlight.js linguist-vendored=true
+themes/fonts/* linguist-vendored=true
