@@ -2,14 +2,16 @@
 src = "src"
 language = "en"
 title = "Malspam Analysis"
+description = "This blog is where I occasionally analyse malicious files or links that I receive via email."
 authors = ["Ioannis Somos <chronobserver@disroot.org>"]
 
 [output.html]
 git-repository-url = "https://github.com/ObserverOfTime/malspam-analysis"
 edit-url-template = "https://github.com/ObserverOfTime/malspam-analysis/blob/master/{path}"
-site-url = "/malspam-analysis/"
+site-url = "https://observeroftime.github.io/malspam-analysis/"
 default-theme = "rust"
 preferred-dark-theme = "coal"
+additional-js = ["theme/js/rss-button.js"]
 
 [output.html.fold]
 enable = true
@@ -17,3 +19,13 @@ level = 1
 
 [output.html.search]
 expand = true
+
+[preprocessor.rss-feed]
+renderers = ["html"]
+full-preview = true
+paginated = false
+atom = true
+json-feed = true
+
+[preprocessor.frontmatter-strip]
+renderers = ["html"]

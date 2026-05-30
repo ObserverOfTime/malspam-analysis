@@ -17,17 +17,34 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v6
-      - name: Install latest mdbook
-        run: gh release download -p 'mdbook-*-x86_64-unknown-linux-gnu.tar.gz' -O- | tar xvz -C $RUNNER_TOOL_CACHE
-        env:
-          GH_REPO: rust-lang/mdbook
-          GH_TOKEN: ${{github.token}}
+      - name: Cache dependencies
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            ~/go/bin/
+            ~/go/pkg/mod/
+          key: ${{hashFiles('book.toml', '.github/workflows/deploy.yml')}}
+      - name: Install mdbook & plugins
+        run: |-
+          cargo install mdbook --version 0.5.3
+          cargo install --git https://github.com/saylesss88/mdbook-rss-feed
+          cargo install --git https://github.com/saylesss88/mdbook-frontmatter-strip
+          go install github.com/loicsikidi/mdbook-sitemap-generator@latest
+          printf '%s\n' "$HOME/.cargo/bin" "$HOME/go/bin" >> "$GITHUB_PATH"
       - name: Build book
-        run: $RUNNER_TOOL_CACHE/mdbook build
+        run: mdbook build
+      - name: Generate sitemap
+        run: |-
+          printf '<?xml version="1.0" encoding="UTF-8"?>\n' > book/sitemap.xml
+          mdbook-sitemap-generator -domain 'observeroftime.github.io/malspam-analysis' >> book/sitemap.xml
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: book
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
