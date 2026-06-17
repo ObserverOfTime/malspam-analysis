@@ -7,11 +7,12 @@ authors = ["Ioannis Somos <chronobserver@disroot.org>"]
 
 [output.html]
 git-repository-url = "https://github.com/ObserverOfTime/malspam-analysis"
-edit-url-template = "https://github.com/ObserverOfTime/malspam-analysis/blob/master/{path}"
 site-url = "https://observeroftime.github.io/malspam-analysis/"
 default-theme = "rust"
 preferred-dark-theme = "coal"
 additional-js = ["theme/js/rss-button.js"]
+no-section-label = true
+hash-files = false
 
 [output.html.fold]
 enable = true

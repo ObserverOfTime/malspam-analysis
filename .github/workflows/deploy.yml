@@ -18,6 +18,7 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v6
       - name: Cache dependencies
+        id: cache-deps
         uses: actions/cache@v5
         with:
           path: |
@@ -29,18 +30,18 @@ jobs:
             ~/go/pkg/mod/
           key: ${{hashFiles('book.toml', '.github/workflows/deploy.yml')}}
       - name: Install mdbook & plugins
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: |-
           cargo install mdbook --version 0.5.3
           cargo install --git https://github.com/saylesss88/mdbook-rss-feed
           cargo install --git https://github.com/saylesss88/mdbook-frontmatter-strip
           go install github.com/loicsikidi/mdbook-sitemap-generator@latest
-          printf '%s\n' "$HOME/.cargo/bin" "$HOME/go/bin" >> "$GITHUB_PATH"
       - name: Build book
         run: mdbook build
       - name: Generate sitemap
         run: |-
           printf '<?xml version="1.0" encoding="UTF-8"?>\n' > book/sitemap.xml
-          mdbook-sitemap-generator -domain 'observeroftime.github.io/malspam-analysis' >> book/sitemap.xml
+          ~/go/bin/mdbook-sitemap-generator -domain 'observeroftime.github.io/malspam-analysis' >> book/sitemap.xml
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:

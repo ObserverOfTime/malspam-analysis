@@ -1,4 +1,6 @@
 *.md linguist-detectable=true
 
-themes/highlight.js linguist-vendored=true
-themes/fonts/* linguist-vendored=true
+theme/favicon.svg linguist-detectable=true
+
+theme/highlight.js linguist-vendored=true
+theme/fonts/* linguist-vendored=true

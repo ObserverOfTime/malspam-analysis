@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created with Inkscape (http://www.inkscape.org/)-->
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#fff" stroke="#000" stroke-linejoin="round">
+    <path stroke-width="2.5" d="M48.5 42.5h200v125h-200z" transform="matrix(.98765357 0 0 .98039334 -26.666555 17.058699)"/>
+    <path d="M131.25669 50.943192 84.489451 132.00644 37.670244 50.973193Z" transform="matrix(2.0841363 0 0 .96700896 -56.25815818 9.61921316)" stroke-width="1.73286"/>
+  </g>
+  <g transform="matrix(.96610848 0 0 .95035664 -48.47855848 .9518354)" stroke="#00f" stroke-linejoin="round">
+    <ellipse cx="174.45717" cy="96.827614" rx="31.222033" ry="31.240204" fill="#5af" fill-opacity=".15" stroke-width="4.37236"/>
+    <path transform="rotate(33.342389)scale(1 .99999986)skewX(.030607)" fill="#00f" stroke-width="3" d="M229.81894-17.366709h74.525124v4.4725385H229.81894z"/>
+  </g>
+  <g transform="matrix(.96610848 0 0 .95035664 -48.47855848 -1.05975314)">
+    <path d="m193.37740365 113.4425513-37.84045378-.91836993 19.71555-32.3116018Z" fill="#fa5" fill-opacity=".1" stroke="red" stroke-width="1.99999403532" stroke-linejoin="round"/>
+    <circle cx="174.98633" cy="107.99593" r="1.5" fill="red" />
+    <ellipse cx="-174.98633" cy="96.906822" rx=".5" ry="7.5" transform="scale(-1 1)" fill="none" stroke="red" stroke-width="1.5" stroke-linejoin="round"/>
+  </g>
+</svg>
