@@ -413,8 +413,8 @@ match:[/\b(?:enum(?:\s+(?:class|struct))?|class|struct|union)/,/\s+/,/\w+/],
 className:{1:"keyword",3:"title.class"}}])}}})();hljs.registerLanguage("cpp",e)
 })();/*! `csharp` grammar compiled for Highlight.js 11.11.1 */
 (()=>{var e=(()=>{"use strict";return e=>{const n={
-keyword:["abstract","as","base","break","case","catch","class","const","continue","do","else","event","explicit","extern","finally","fixed","for","foreach","goto","if","implicit","in","interface","internal","is","lock","namespace","new","operator","out","override","params","private","protected","public","readonly","record","ref","return","scoped","sealed","sizeof","stackalloc","static","struct","switch","this","throw","try","typeof","unchecked","unsafe","using","virtual","void","volatile","while"].concat(["add","alias","and","ascending","args","async","await","by","descending","dynamic","equals","file","from","get","global","group","init","into","join","let","nameof","not","notnull","on","or","orderby","partial","record","remove","required","scoped","select","set","unmanaged","value|0","var","when","where","with","yield"]),
-built_in:["bool","byte","char","decimal","delegate","double","dynamic","enum","float","int","long","nint","nuint","object","sbyte","short","string","ulong","uint","ushort"],
+keyword:["abstract","as","base","break","case","catch","class","const","continue","do","else","event","explicit","extern","finally","fixed","for","foreach","goto","if","implicit","in","interface","internal","is","lock","namespace","new","operator","out","override","params","private","protected","public","readonly","record","ref","return","scoped","sealed","sizeof","stackalloc","static","struct","switch","this","throw","try","typeof","unchecked","unsafe","using","virtual","void","volatile","while"].concat(["add","alias","and","ascending","async","await","by","descending","dynamic","equals","file","from","get","global","group","init","into","join","let","nameof","not","notnull","on","or","orderby","partial","record","remove","required","scoped","select","set","unmanaged","value|0","var","when","where","with","yield"]),
+built_in:["bool","byte","char","decimal","delegate","double","dynamic","enum","float","int","long","nint","nuint","object","sbyte","short","string","ulong","uint","ushort","IntPtr"],
 literal:["default","false","null","true"]},a=e.inherit(e.TITLE_MODE,{
 begin:"[a-zA-Z](\\.?\\w)*"}),i={className:"number",variants:[{
 begin:"\\b(0b[01']+)"},{
@@ -466,18 +466,18 @@ disableAutodetect:!0,contains:[{begin:[/\b[A-Za-z0-9_/]+/,/\(/],beginScope:{
 contains:[{begin:/\\'/}]},{className:"number",begin:/\b\d+(\.\d+)?\b/},{
 className:"literal",begin:/\b(true|false)\b/},{className:"meta",
 begin:/\/(disabled|breakpoint)\b/},{className:"punctuation",begin:/[(),{}:]/}]})
-})();hljs.registerLanguage("cyberchef",e)})();/*! `dos` grammar compiled for Highlight.js 11.11.1 */
-(()=>{var e=(()=>{"use strict";return e=>{const r=e.COMMENT(/^\s*@?rem\b/,/$/,{
-relevance:10});return{name:"Batch file (DOS)",aliases:["bat","cmd"],
-case_insensitive:!0,illegal:/\/\*/,keywords:{
-keyword:["if","else","goto","for","in","do","call","exit","not","exist","errorlevel","defined","equ","neq","lss","leq","gtr","geq"],
-built_in:["prn","nul","lpt3","lpt2","lpt1","con","com4","com3","com2","com1","aux","shift","cd","dir","echo","setlocal","endlocal","set","pause","copy","append","assoc","at","attrib","break","cacls","cd","chcp","chdir","chkdsk","chkntfs","cls","cmd","color","comp","compact","convert","date","dir","diskcomp","diskcopy","doskey","erase","fs","find","findstr","format","ftype","graftabl","help","keyb","label","md","mkdir","mode","more","move","path","pause","print","popd","pushd","promt","rd","recover","rem","rename","replace","restore","rmdir","shift","sort","start","subst","time","title","tree","type","ver","verify","vol","ping","net","ipconfig","taskkill","xcopy","ren","del"]
-},contains:[{className:"variable",begin:/%%[^ ]|%[^ ]+?%|![^ ]+?!/},{
-className:"function",begin:"^\\s*[A-Za-z._?][A-Za-z0-9_$#@~.?]*(:|\\s+label)",
-end:"goto:eof",contains:[e.inherit(e.TITLE_MODE,{
-begin:"([_a-zA-Z]\\w*\\.)*([_a-zA-Z]\\w*:)?[_a-zA-Z]\\w*"}),r]},{
-className:"number",begin:"\\b\\d+",relevance:0},r]}}})()
-;hljs.registerLanguage("dos",e)})();/*! `javascript` grammar compiled for Highlight.js 11.11.1 */
+})();hljs.registerLanguage("cyberchef",e)})();/*! `batch` grammar compiled for Highlight.js 11.11.2 */
+(()=>{var e=(()=>{"use strict";return e=>({name:"Batch file",
+aliases:["bat","dosbatch","cmd"],case_insensitive:!0,keywords:{
+built_in:"append assoc at attrib break cacls cd chcp chdir chkdsk chkntfs cls cmd color comp compact convert copy date del dir diskcomp diskcopy doskey echo endlocal erase fc find findstr format ftype graftabl help keyb label md mkdir mode more move path pause popd print prompt pushd rd recover ren rename replace restore rmdir set setlocal shift sort start subst time title tree type ver verify vol xcopy rem ping netsh taskkill tasklist reg regedit sc net ipconfig systeminfo wmic timeout robocopy icacls takeown cipher schtasks gpupdate whoami hostname goto call exit if else for do while in defined errorlevel cmdextversion not",
+operator:"EQU NEQ LSS LEQ GTR GEQ ="},contains:[{className:"comment",
+begin:/^\s*rem\s/i,end:/$/,relevance:10},{className:"comment",begin:/::/,end:/$/
+},{className:"string",begin:/=/,end:/$/,excludeBegin:true,contains:[{className:"variable",
+begin:/%\w+%|%~f\d/}]},{className:"string",begin:/"/,end:/"$/,contains:[{className:"variable",
+begin:/%\w+%|%~f\d/}]},{className:"symbol",begin:/:\w+/},{className:"meta",begin:/@echo\s+o(ff|n)/},{
+className:"operator",begin:/[|&><=]/},{className:"operator",begin:/\d*(?:>>|>|<|2>&1|2>nul)/}]})})()
+;hljs.registerLanguage("batch",e)})();
+/*! `javascript` grammar compiled for Highlight.js 11.11.1 */
 (()=>{var e=(()=>{"use strict"
 ;const e="[A-Za-z$_][0-9A-Za-z$_]*",n=["as","in","of","if","for","while","finally","var","new","function","do","return","void","else","break","catch","instanceof","with","throw","case","default","try","switch","continue","typeof","delete","let","yield","const","class","debugger","async","await","static","import","from","export","extends","using"],a=["true","false","null","undefined","NaN","Infinity"],t=["Object","Function","Boolean","Symbol","Math","Date","Number","BigInt","String","RegExp","Array","Float32Array","Float64Array","Int8Array","Uint8Array","Uint8ClampedArray","Int16Array","Int32Array","Uint16Array","Uint32Array","BigInt64Array","BigUint64Array","Set","Map","WeakSet","WeakMap","ArrayBuffer","SharedArrayBuffer","Atomics","DataView","JSON","Promise","Generator","GeneratorFunction","AsyncFunction","Reflect","Proxy","Intl","WebAssembly"],s=["Error","EvalError","InternalError","RangeError","ReferenceError","SyntaxError","TypeError","URIError"],r=["setInterval","setTimeout","clearInterval","clearTimeout","require","exports","eval","isFinite","isNaN","parseFloat","parseInt","decodeURI","decodeURIComponent","encodeURI","encodeURIComponent","escape","unescape"],c=["arguments","this","super","console","window","document","localStorage","sessionStorage","module","global"],i=[].concat(r,t,s)
 ;return o=>{const l=o.regex,d=e,b={begin:/<[A-Za-z0-9\\._:-]+/,
@@ -604,7 +604,7 @@ className:"function",begin:/\[.*\]\s*[\w]+[ ]??\(/,end:/$/,returnBegin:!0,
 relevance:0,contains:[{className:"keyword",
 begin:"(".concat(n.keyword.toString().replace(/\s/g,"|"),")\\b"),endsParent:!0,
 relevance:0},e.inherit(e.TITLE_MODE,{endsParent:!0})]
-},g=[p,r,s,e.C_NUMBER_MODE,a,t,{className:"built_in",variants:[{
+},g=[p,r,s,a,t,{className:"built_in",variants:[{
 begin:"(Add|Clear|Close|Copy|Enter|Exit|Find|Format|Get|Hide|Join|Lock|Move|New|Open|Optimize|Pop|Push|Redo|Remove|Rename|Reset|Resize|Search|Select|Set|Show|Skip|Split|Step|Switch|Undo|Unlock|Watch|Backup|Checkpoint|Compare|Compress|Convert|ConvertFrom|ConvertTo|Dismount|Edit|Expand|Export|Group|Import|Initialize|Limit|Merge|Mount|Out|Publish|Restore|Save|Sync|Unpublish|Update|Approve|Assert|Build|Complete|Confirm|Deny|Deploy|Disable|Enable|Install|Invoke|Register|Request|Restart|Resume|Start|Stop|Submit|Suspend|Uninstall|Unregister|Wait|Debug|Measure|Ping|Repair|Resolve|Test|Trace|Connect|Disconnect|Read|Receive|Send|Write|Block|Grant|Protect|Revoke|Unblock|Unprotect|Use|ForEach|Sort|Tee|Where)+(-)[\\w\\d]+"
 }]},i,{className:"literal",begin:/\$(null|true|false)\b/},{
 className:"selector-tag",begin:/@\B/,relevance:0}],m={begin:/\[/,end:/\]/,
