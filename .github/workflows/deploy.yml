@@ -33,15 +33,48 @@ jobs:
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: |-
           cargo install mdbook --version 0.5.3
-          cargo install --git https://github.com/saylesss88/mdbook-rss-feed
-          cargo install --git https://github.com/saylesss88/mdbook-frontmatter-strip
-          go install github.com/loicsikidi/mdbook-sitemap-generator@latest
+          cargo install --git https://github.com/saylesss88/mdbook-rss-feed --rev 1cdbba0
+          cargo install --git https://github.com/saylesss88/mdbook-frontmatter-strip --rev cefe0f9
       - name: Build book
         run: mdbook build
       - name: Generate sitemap
-        run: |-
-          printf '<?xml version="1.0" encoding="UTF-8"?>\n' > book/sitemap.xml
-          ~/go/bin/mdbook-sitemap-generator -domain 'observeroftime.github.io/malspam-analysis' >> book/sitemap.xml
+        uses: actions/github-script@v9
+        env:
+          BASE_URL: https://${{github.event.repository.owner.name}}.github.io/${{github.event.repository.name}}
+        with:
+          script: |-
+            const { readFileSync, writeFileSync } = require('fs');
+            const { relative } = require('path');
+
+            const globs = [`src/**/*.md`, '!src/SUMMARY.md'].join('\n');
+            const files = await glob.create(globs)
+              .then(g => g.glob()).then(f => {
+                return f.sort((a, b) => {
+                  if (a.endsWith('index.md')) return 1;
+                  if (b.endsWith('index.md')) return -1;
+                  return b.localeCompare(a);
+                })
+              });
+
+            const base = process.env.BASE_URL.toLocaleLowerCase()
+            let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+            for (const file of files) {
+              const content = readFileSync(file, 'utf8');
+              const m = content.match(/^---\r?\n[\s\S]*?^date:\s*(.+)$/m);
+              const lastmod = m?.[1].trim().replace(/^['"]|['"]$/g, '');
+              const html = relative('src', file).replace('.md', '.html');
+              sitemap += (
+                '<url>\n' +
+                  `  <loc>${base}/${html}</loc>\n` +
+                  `  <lastmod>${lastmod}</lastmod>\n` +
+                  '</url>\n'
+              );
+            }
+            sitemap += '</urlset>';
+
+            writeFileSync('book/sitemap.xml', sitemap);
+            core.info(`Generated sitemap.xml with ${files.length} URLs.`);
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
