@@ -33,7 +33,7 @@ jobs:
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: |-
           cargo install mdbook --version 0.5.3
-          cargo install --git https://github.com/saylesss88/mdbook-rss-feed --rev 1cdbba0
+          cargo install --git https://github.com/saylesss88/mdbook-rss-feed --rev 1cdbba0 --features atom,json-feed
           cargo install --git https://github.com/saylesss88/mdbook-frontmatter-strip --rev cefe0f9
       - name: Build book
         run: mdbook build
