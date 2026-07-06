@@ -1,3 +1,18 @@
 <meta name="google-site-verification" content="j1MKOyd-Eh8vimIgbl-cs_LWCueolP5X5DlVT2A8FdA">
-<meta name="author" property="article:author" content="Ioannis Somos">
+{{#if is_frontmatter}}
+<meta name="title" content="{{ og_title }}">
+<meta property="og:title" content="{{ og_title }}">
+<meta name="description" content="{{ og_description }}">
+<meta property="og:description" content="{{ og_description }}">
+<meta property="og:image" content="{{ og_image_url }}">
+{{else}}
+<meta name="description" content="{{ description }}">
 <meta property="og:image" content="https://observeroftime.github.io/malspam-analysis/favicon.png">
+{{/if}}
+<meta name="author" content="Ioannis Somos">
+<meta property="article:author" content="Ioannis Somos">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Malspam Analysis">
+<meta name="twitter:card" content="summary">
+<link href="https://observeroftime.github.io/malspam-analysis/atom.xml"
+      rel="alternate" type="application/atom+xml" title="Malspam Analysis Atom Feed">

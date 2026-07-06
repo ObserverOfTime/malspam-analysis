@@ -27,6 +27,3 @@ full-preview = true
 paginated = false
 atom = true
 json-feed = true
-
-[preprocessor.frontmatter-strip]
-renderers = ["html"]

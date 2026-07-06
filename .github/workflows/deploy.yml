@@ -32,9 +32,8 @@ jobs:
       - name: Install mdbook & plugins
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: |-
-          cargo install mdbook --version 0.5.3
+          cargo install --git https://github.com/sspaeti/mdBook --branch adding_frontmatter --features frontmatter mdbook
           cargo install --git https://github.com/saylesss88/mdbook-rss-feed --rev 1cdbba0 --features atom,json-feed
-          cargo install --git https://github.com/saylesss88/mdbook-frontmatter-strip --rev cefe0f9
       - name: Build book
         run: mdbook build
       - name: Generate sitemap
@@ -46,35 +45,31 @@ jobs:
             const { readFileSync, writeFileSync } = require('fs');
             const { relative } = require('path');
 
-            const globs = [`src/**/*.md`, '!src/SUMMARY.md'].join('\n');
-            const files = await glob.create(globs)
-              .then(g => g.glob()).then(f => {
-                return f.sort((a, b) => {
+            const base = process.env.BASE_URL.toLocaleLowerCase();
+            const globs = ['src/**/*.md', '!src/SUMMARY.md'].join('\n');
+            const urls = await glob.create(globs)
+              .then(g => g.glob()).then(files => {
+                return files.sort((a, b) => {
                   if (a.endsWith('index.md')) return 1;
                   if (b.endsWith('index.md')) return -1;
                   return b.localeCompare(a);
-                })
+                }).map(f => {
+                  const lines = readFileSync(f, 'utf8').split('\n');
+                  const html = relative('src', f).replace('.md', '.html');
+                  const lastmod = lines[4].match(/^date: (.+)$/)[1];
+                  return '<url>\n' +
+                    `  <loc>${base}/${html}</loc>\n` +
+                    `  <lastmod>${lastmod}</lastmod>\n` +
+                    '</url>';
+                });
               });
 
-            const base = process.env.BASE_URL.toLocaleLowerCase()
-            let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n' +
-              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-            for (const file of files) {
-              const content = readFileSync(file, 'utf8');
-              const m = content.match(/^---\r?\n[\s\S]*?^date:\s*(.+)$/m);
-              const lastmod = m?.[1].trim().replace(/^['"]|['"]$/g, '');
-              const html = relative('src', file).replace('.md', '.html');
-              sitemap += (
-                '<url>\n' +
-                  `  <loc>${base}/${html}</loc>\n` +
-                  `  <lastmod>${lastmod}</lastmod>\n` +
-                  '</url>\n'
-              );
-            }
-            sitemap += '</urlset>';
-
+            const sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+              urls.join('\n') +
+              '</urlset>';
             writeFileSync('book/sitemap.xml', sitemap);
-            core.info(`Generated sitemap.xml with ${files.length} URLs.`);
+            core.info(`Generated sitemap.xml with ${urls.length} URLs.`);
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:

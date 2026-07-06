@@ -3,6 +3,7 @@ title: "Malspam Analysis"
 description: "This blog is where I occasionally analyse malicious files or links that I receive via email."
 author: "Ioannis Somos"
 date: 2026-03-07T22:22:34+03:00
+featured_image_url: https://observeroftime.github.io/malspam-analysis/favicon.png
 ---
 # Introduction
 
