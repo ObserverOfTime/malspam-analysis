@@ -17,3 +17,4 @@
 # 2026-04-24
 
 - [eSinerji M&uuml;hendislik - Teklif talebi - Elektrik malzemeleri (Part 1)](./2026-04-24/d4ce9d61b99ec0198cc4f2eae857d79adf36a6b35e1cf77e5ff425460d4f5cac/01.md)
+- [eSinerji M&uuml;hendislik - Teklif talebi - Elektrik malzemeleri (Part 2)](./2026-04-24/d4ce9d61b99ec0198cc4f2eae857d79adf36a6b35e1cf77e5ff425460d4f5cac/02.md)
